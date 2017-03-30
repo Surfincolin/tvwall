@@ -6,14 +6,13 @@
 <body>
 	<h1>90s TV Controller</h1>
 	<div>
-		<button type="button">Start Video</button>
-		<button type="button">Shutdown Computers</button>
-		<button type="button">Restart Video</button> 
+		<button type="button" onclick="startVideos();">Start Video</button>
+		<button type="button" onclick="stopVideos();">Stop Video</button> 
+		<button type="button" onclick="turnofftvs();">Shutdown Computers</button>
 	</div>
 	<div>
 		<h2>Computers Connected and On</h2>
-		<ul>
-			<li>192.168.0.23</li>
+		<ul id="connections">
 		</ul>
 	</div>
 <script src="/socket.io/socket.io.js"></script>
@@ -21,10 +20,32 @@
 	console.log("90s TV Control App");
 	var socket = io();
 
-	socket.on('news', function (data) {
-		console.log(data);
-		socket.emit('my other event', { my: 'data' });
+	socket.on('notification', function(data) {
+		console.log('notified');
+
+		var list = '';
+		data.connected.forEach(function(tv) {
+			list += '<li>' + tv.hostname + ' : ' + tv.ip + '</li>'
+		});
+
+		document.getElementById('connections').innerHTML = list;
+
 	});
+
+	function turnofftvs() {
+		console.log('Shutdown Clicked');
+		socket.emit('turnoff');
+	}
+
+	function stopVideos() {
+		console.log('Stopping Videos');
+		socket.emit('stopVideos');
+	}
+
+	function startVideos() {
+		console.log('Starting Videos');
+		socket.emit('startVideos');
+	}
 </script>
 
 </body>
