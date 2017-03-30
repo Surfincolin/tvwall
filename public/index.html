@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>90s TV</title>
+</head>
+<body>
+	<h1>90s TV Controller</h1>
+	<div>
+		<button type="button">Start Video</button>
+		<button type="button">Shutdown Computers</button>
+		<button type="button">Restart Video</button> 
+	</div>
+	<div>
+		<h2>Computers Connected and On</h2>
+		<ul>
+			<li>192.168.0.23</li>
+		</ul>
+	</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	console.log("90s TV Control App");
+	var socket = io();
+
+	socket.on('news', function (data) {
+		console.log(data);
+		socket.emit('my other event', { my: 'data' });
+	});
+</script>
+
+</body>
+</html>
