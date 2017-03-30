@@ -12,6 +12,7 @@
 	</div>
 	<div>
 		<h2>Computers Connected and On</h2>
+		<div><strong>Master</strong> :: tvpi1.local : <span id='masterIp'></span></div>
 		<ul id="connections">
 		</ul>
 	</div>
@@ -19,6 +20,11 @@
 <script>
 	console.log("90s TV Control App");
 	var socket = io();
+
+	socket.on('masterIp', function(ip) {
+		console.log('Master IP');
+		document.getElementById('masterIp').innerHTML = ip;
+	});
 
 	socket.on('notification', function(data) {
 		console.log('notified');

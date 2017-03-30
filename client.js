@@ -1,6 +1,6 @@
 var os = require('os');
 var nrc = require('node-run-cmd');
-var socket = require('socket.io-client')('http://localhost:8080/television');
+var socket = require('socket.io-client')('http://tvpi1.local/television');
 
 socket.on('connect', function(){
   console.log('Connected to System');
@@ -49,10 +49,10 @@ socket.on('shutdown', function(data) {
 
 socket.on('startVideo', function(data) {
   console.log('Starting Video');
-  // nrc.run('sudo supervisorctl start video_looper');
+  nrc.run('sudo supervisorctl start video_looper');
 });
 
 socket.on('stopVideo', function(data) {
   console.log('Stopping Video');
-  // nrc.run('sudo supervisorctl stop video_looper');
+  nrc.run('sudo supervisorctl stop video_looper');
 });
