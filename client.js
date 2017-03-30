@@ -24,8 +24,8 @@ socket.on('connect', function(){
       } else {
         // this interface has only one ipv4 adress
         console.log(ifname, iface.address);
-        // if (ifname == 'wlan0') {
-        if (ifname == 'en1') {
+        if (ifname == 'wlan0') {
+        // if (ifname == 'en1') {
           
           var info = {
             hostname: os.hostname(),

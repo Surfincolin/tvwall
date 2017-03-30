@@ -31,6 +31,11 @@ io.on('connection', function (socket) {
 	socket.on('turnoff', function() {
 		console.log('Turning Off TVs');
 		shutdownFlag = true;
+
+		if (alltvs.length == 0) {
+			nrc.run('sudo shutdown -h now');
+		}
+
 		tvnsp.emit('shutdown');
 	});
 
